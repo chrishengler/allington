@@ -1,0 +1,30 @@
+body {
+  padding: 0px;
+  margin: 0px;
+  background-attachment: fixed;
+  font-family: sans-serif;
+}
+
+header {
+  font-family: sans-serif;
+  position: sticky;
+  top: 0;
+  /* Ensures it sticks to the top */
+  left: 0;
+  /* Aligns the header to the left edge */
+  width: 100%;
+  /* Makes the header span the entire width of the screen */
+  background-color: #0f0f8a;
+  color: #f9f9f9;
+  text-align: left;
+  padding: 20px;
+}
+
+.header a {
+  color: white;
+  text-decoration: none;
+}
+
+.header a:hover {
+  text-decoration: none;
+}
