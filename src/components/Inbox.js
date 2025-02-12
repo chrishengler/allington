@@ -1,25 +1,33 @@
 import React, { useEffect, useState } from "react";
-import { getThreads } from "../api/api";
+import { useParams } from 'react-router-dom';
+import { getInbox, getThreads } from "../api/api";
 import { Box, Divider, List, ListItem, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, Paper } from "@mui/material";
 import InboxThread from "./InboxThread";
 
 function Inbox() {
+  const { id } = useParams();
   const [threads, setThreads] = useState([]);
 
   useEffect(() => {
-    getThreads()
-      .then((response) => setThreads(response.data))
-      .catch((error) => console.error("Error fetching threads", error));
-  }, []);
+    const fetchThreads = async () => {
+      try {
+        const response = id ? await getInbox(id) : await getThreads();
+        setThreads([]); // Clear the old threads first
+        setThreads(response.data);
+      } catch (error) {
+        console.error("Error fetching threads", error);
+      }
+    };
+  
+    fetchThreads();
+  }, [id]);
 
   return (
     <div className="threads">
       <Paper>
         <List dense={true}>
           {threads.map((thread) => (
-            <ListItem key={thread.pk}>
-              <InboxThread thread={thread} />
-            </ListItem>
+              <InboxThread key={thread.pk} thread={thread} />
           ))}
         </List>
       </Paper>

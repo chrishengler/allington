@@ -13,7 +13,7 @@ function Header() {
 }} className="header">
     <Typography variant="h5">
       <Link to="/">
-      Allington Pippin's Mailbox
+      Spamfiles
       </Link>
     </Typography>
   </AppBar>

@@ -4,7 +4,16 @@ import EmailIcon from "@mui/icons-material/Email";
 
 function InboxThread({ thread }) {
   return (
-    <ListItemButton component={Link} to={`/threads/${thread.pk}`}><ListItem><ListItemIcon><EmailIcon /></ListItemIcon><ListItemText>{thread.title}</ListItemText></ListItem></ListItemButton>
+    <ListItem sx={{padding: 0}}>
+      <ListItemButton component={Link} to={`/threads/${thread.pk}`} sx={{padding: 0, paddingLeft: 1}}>
+        <ListItemIcon>
+          <EmailIcon />
+        </ListItemIcon>
+        <ListItemText>
+          {thread.title}
+        </ListItemText>
+      </ListItemButton>
+    </ListItem>
   )
 }
 

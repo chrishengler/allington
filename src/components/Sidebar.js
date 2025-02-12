@@ -1,11 +1,32 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material"
+import AllInboxIcon from '@mui/icons-material/AllInbox'
 import InboxIcon from '@mui/icons-material/Inbox';
 import HelpIcon from '@mui/icons-material/Help';
 
-const navigationItems = [{ text: 'Inbox', path: '/inbox', icon: <InboxIcon /> }, { text: 'FAQ', path: '/faq', icon: <HelpIcon /> }]
+import { getInboxes } from "../api/api";
+
 
 function Sidebar() {
+  const [inboxes, setInboxes] = useState([]);
+
+  useEffect(() => {
+    getInboxes()
+      .then((response) => setInboxes(response.data))
+      .catch((error) => console.error("Error fetching inboxes", error));
+  }, []);
+
+  const combinedInbox = [{ text: 'All inboxes', path: '/inbox', icon: <AllInboxIcon />}]
+  const characterInboxes = inboxes.map((item) => (
+    {text: item.name, path: `./inbox/${item.pk}`, icon: <InboxIcon />}
+  )
+  )
+
+  const otherNavigationItems = [{text: 'FAQ', path: '/faq', icon: <HelpIcon />}];
+
+  const navigationItems = combinedInbox.concat(characterInboxes, otherNavigationItems);
+
   return (
     <Box sx={{
       display: "flex",

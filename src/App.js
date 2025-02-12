@@ -50,7 +50,7 @@ const App = () => {
           {/* MAIN CONTENT */}
           <Box sx={{flexGrow: 1, padding: 3, bgcolor: '#f9f9f9', overflowY: 'auto'}}>
             <Routes>
-              {['/', '/inbox'].map(path => <Route path={path} key={path} element={<Inbox />} />)}
+              {['/', '/inbox', '/inbox/:id'].map(path => <Route path={path} key={path} element={<Inbox />} />)}
               <Route path="/threads/:id" element={<ThreadDetail />} />
               <Route path="/faq" element={<FaqList />} />
             </Routes>
