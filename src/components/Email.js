@@ -7,7 +7,7 @@ function Email({ email }) {
   console.log()
   return (
     <Paper elevation={2} sx={{ maxWidth: '800px', margin: '0 auto', width: '100%' }}>
-      <EmailHeader sender={email.sender} recipient={email.recipient} timestamp={email.timestamp} />
+      <EmailHeader sender={email.sender} recipient={email.recipient} cc_recipients={email.cc} timestamp={email.timestamp} />
       <Divider />
       <Typography variant="subtitle1" sx={{ 'p': 1 }}>{email.subject}</Typography>
       <Divider variant="middle" />

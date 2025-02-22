@@ -8,18 +8,18 @@ function ImageAttachmentBox({ image_attachments }) {
       <Typography variant="subtitle1" sx={{ padding: 1 }}>
         {image_attachments.length} attached {image_attachments.length > 1 ? 'files' : 'file'}:
       </Typography>
-      {image_attachments.map((image) =>
-      (
-        <Box>
-          <List>
-            <ListItem >
-              <ImageAttachment image_data={image} key={image.image} />
+      <Box>
+        <List>
+          {image_attachments.map((image) =>
+          (
+            <ListItem  key={image.image} >
+              <ImageAttachment image_data={image}/>
             </ListItem>
-          </List>
-        </Box>
-      )
-      )
-      }
+          )
+          )
+          }
+        </List>
+      </Box>
     </Box>
   )
 }
