@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
 import { getInbox, getThreads } from "../api/api";
-import { Box, Divider, List, ListItem, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, Paper } from "@mui/material";
+import { List, Paper } from "@mui/material";
 import InboxThread from "./InboxThread";
 
 function Inbox() {

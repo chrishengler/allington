@@ -1,5 +1,5 @@
 import EmailHeader from "./EmailHeader";
-import { Box, Divider, Paper, Typography } from "@mui/material";
+import { Divider, Paper, Typography } from "@mui/material";
 import ImageAttachmentBox from "./ImageAttachmentBox";
 
 function Email({ email }) {
