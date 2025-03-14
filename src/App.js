@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Box, CssBaseline, Toolbar, } from "@mui/material";
 import '@fontsource-variable/urbanist';
 
-import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import Inbox from "./components/Inbox";
 import FaqList from "./components/FaqList";
@@ -27,12 +26,8 @@ const App = () => {
     <Box sx={{display: 'flex', flexDirection: 'column', minHeight: "100vh"}}>
       <CssBaseline />
       <Router>
-        {/* <Header /> */}
-        {/* SIDEBAR + CONTENT WRAPPER */}
         <Box sx={{display: 'flex', flex: 1}}>
-          {/* SIDEBAR (Flexible Width) */}
           <Sidebar />
-          {/* MAIN CONTENT */}
           <Box sx={{flexGrow: 1, padding: 3, bgcolor: '#f9f9f9', overflowY: 'auto'}}>
              <Toolbar />
              {routeDefinition}
