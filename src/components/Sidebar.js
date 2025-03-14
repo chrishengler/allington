@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { AppBar, Box, Drawer, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from "@mui/material"
+import { AppBar, Box, Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from "@mui/material"
 import AllInboxIcon from '@mui/icons-material/AllInbox'
 import HelpIcon from '@mui/icons-material/Help';
 import InboxIcon from '@mui/icons-material/Inbox';
@@ -46,7 +46,9 @@ function Sidebar(props) {
 
   const navigationItems = combinedInbox.concat(characterInboxes, otherNavigationItems);
 
-  const drawer = (<List>
+  const drawer = (
+    <>
+      <List>
         {navigationItems.map((item) => (
           <ListItem key={item.text} disablePadding>
             <ListItemButton component={Link} to={item.path}>
@@ -55,7 +57,8 @@ function Sidebar(props) {
             </ListItemButton>
           </ListItem>
         ))}
-      </List>)
+      </List>
+    </>)
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -115,12 +118,6 @@ function Sidebar(props) {
           {drawer}
         </Drawer>
       </Box>
-      {/* <Box
-        component="main"
-        sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
-      >
-        <Toolbar />
-      </Box> */}
     </Box>
   );
 
