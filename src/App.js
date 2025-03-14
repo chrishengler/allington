@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Box, CssBaseline, } from "@mui/material";
+import { Box, CssBaseline, Toolbar, } from "@mui/material";
 import '@fontsource-variable/urbanist';
 
 import Header from "./components/Header";
@@ -13,6 +13,13 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { themeOptions } from "./theme";
 
 const App = () => {
+  const routeDefinition = (
+            <Routes>
+              {['/', '/inbox', '/inbox/:id'].map(path => <Route path={path} key={path} element={<Inbox />} />)}
+              <Route path="/threads/:id" element={<ThreadDetail />} />
+              <Route path="/faq" element={<FaqList />} />
+            </Routes>
+  )
 
   const theme = createTheme(themeOptions);
   return (
@@ -20,21 +27,15 @@ const App = () => {
     <Box sx={{display: 'flex', flexDirection: 'column', minHeight: "100vh"}}>
       <CssBaseline />
       <Router>
-
-        <Header />
-
+        {/* <Header /> */}
         {/* SIDEBAR + CONTENT WRAPPER */}
         <Box sx={{display: 'flex', flex: 1}}>
           {/* SIDEBAR (Flexible Width) */}
           <Sidebar />
-
           {/* MAIN CONTENT */}
           <Box sx={{flexGrow: 1, padding: 3, bgcolor: '#f9f9f9', overflowY: 'auto'}}>
-            <Routes>
-              {['/', '/inbox', '/inbox/:id'].map(path => <Route path={path} key={path} element={<Inbox />} />)}
-              <Route path="/threads/:id" element={<ThreadDetail />} />
-              <Route path="/faq" element={<FaqList />} />
-            </Routes>
+             <Toolbar />
+             {routeDefinition}
           </Box>
         </Box>
       </Router>

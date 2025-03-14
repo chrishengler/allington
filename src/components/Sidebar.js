@@ -1,14 +1,33 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material"
+import { AppBar, Box, Drawer, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from "@mui/material"
 import AllInboxIcon from '@mui/icons-material/AllInbox'
-import InboxIcon from '@mui/icons-material/Inbox';
 import HelpIcon from '@mui/icons-material/Help';
+import InboxIcon from '@mui/icons-material/Inbox';
+import MenuIcon from '@mui/icons-material/Menu';
 
 import { getInboxes } from "../api/api";
 
+function Sidebar(props) {
+  const drawerWidth = 240;
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
 
-function Sidebar() {
+  const handleDrawerClose = () => {
+    setIsClosing(true);
+    setMobileOpen(false);
+  };
+
+  const handleDrawerTransitionEnd = () => {
+    setIsClosing(false);
+  };
+
+  const handleDrawerToggle = () => {
+    if (!isClosing) {
+      setMobileOpen(!mobileOpen);
+    }
+  };
+
   const [inboxes, setInboxes] = useState([]);
 
   useEffect(() => {
@@ -27,18 +46,7 @@ function Sidebar() {
 
   const navigationItems = combinedInbox.concat(characterInboxes, otherNavigationItems);
 
-  return (
-    <Box sx={{
-      display: "flex",
-      flexDirection: "column",
-      flexShrink: 0,
-      backgroundColor: "#ffffff",
-      borderRight: "1px solid #e0e0e0",
-      borderLeft: 2,
-      overflowY: "auto",
-      minWidth: "150px",
-    }}>
-      <List>
+  const drawer = (<List>
         {navigationItems.map((item) => (
           <ListItem key={item.text} disablePadding>
             <ListItemButton component={Link} to={item.path}>
@@ -47,8 +55,75 @@ function Sidebar() {
             </ListItemButton>
           </ListItem>
         ))}
-      </List>
-    </Box>)
+      </List>)
+
+  return (
+    <Box sx={{ display: 'flex' }}>
+      <AppBar
+        position="fixed"
+        sx={{
+          width: { sm: `calc(100% - ${drawerWidth}px)` },
+          ml: { sm: `${drawerWidth}px` },
+        }}
+      >
+        <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            sx={{ mr: 2, display: { sm: 'none' } }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" noWrap component="div">
+            Spamfiles
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <Box
+        component="nav"
+        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+        aria-label="mailbox folders"
+      >
+        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+        <Drawer
+          variant="temporary"
+          open={mobileOpen}
+          onTransitionEnd={handleDrawerTransitionEnd}
+          onClose={handleDrawerClose}
+          sx={{
+            display: { xs: 'block', sm: 'none' },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+          }}
+          slotProps={{
+            root: {
+              keepMounted: true, // Better open performance on mobile.
+            },
+          }}
+        >
+          {drawer}
+        </Drawer>
+        <Drawer
+          variant="permanent"
+          sx={{
+            display: { xs: 'none', sm: 'block' },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+          }}
+          open
+        >
+          {drawer}
+        </Drawer>
+      </Box>
+      {/* <Box
+        component="main"
+        sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
+      >
+        <Toolbar />
+      </Box> */}
+    </Box>
+  );
+
 }
 
 export default Sidebar;
