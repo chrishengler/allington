@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { AppBar, Box, Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from "@mui/material"
+import { AppBar, Box, Drawer, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from "@mui/material"
 import AllInboxIcon from '@mui/icons-material/AllInbox'
 import HelpIcon from '@mui/icons-material/Help';
 import InboxIcon from '@mui/icons-material/Inbox';
@@ -36,13 +36,13 @@ function Sidebar(props) {
       .catch((error) => console.error("Error fetching inboxes", error));
   }, []);
 
-  const combinedInbox = [{ text: 'All inboxes', path: '/inbox', icon: <AllInboxIcon />}]
+  const combinedInbox = [{ text: 'All inboxes', path: '/inbox', icon: <AllInboxIcon /> }]
   const characterInboxes = inboxes.map((item) => (
-    {text: item.name, path: `./inbox/${item.pk}`, icon: <InboxIcon />}
+    { text: item.name, path: `./inbox/${item.pk}`, icon: <InboxIcon /> }
   )
   )
 
-  const otherNavigationItems = [{text: 'FAQ', path: '/faq', icon: <HelpIcon />}];
+  const otherNavigationItems = [{ text: 'FAQ', path: '/faq', icon: <HelpIcon /> }];
 
   const navigationItems = combinedInbox.concat(characterInboxes, otherNavigationItems);
 
