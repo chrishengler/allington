@@ -10,22 +10,10 @@ import { getInboxes } from "../api/api";
 
 function Sidebar(props) {
   const drawerWidth = 240;
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [isClosing, setIsClosing] = useState(false);
-
-  const handleDrawerClose = () => {
-    setIsClosing(true);
-    setMobileOpen(false);
-  };
-
-  const handleDrawerTransitionEnd = () => {
-    setIsClosing(false);
-  };
+  const [mobileOpen, setMobileOpen] = useState(false)
 
   const handleDrawerToggle = () => {
-    if (!isClosing) {
-      setMobileOpen(!mobileOpen);
-    }
+    setMobileOpen(!mobileOpen);
   };
 
   const [inboxes, setInboxes] = useState([]);
@@ -89,24 +77,23 @@ function Sidebar(props) {
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
         aria-label="mailbox folders"
       >
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Drawer
           variant="temporary"
           open={mobileOpen}
-          onTransitionEnd={handleDrawerTransitionEnd}
-          onClose={handleDrawerClose}
+          onClose={handleDrawerToggle}
           sx={{
             display: { xs: 'block', sm: 'none' },
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
           }}
           slotProps={{
             root: {
-              keepMounted: true, // Better open performance on mobile.
+              keepMounted: true,
             },
           }}
         >
           {drawer}
         </Drawer>
+
         <Drawer
           variant="permanent"
           sx={{
