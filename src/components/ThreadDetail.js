@@ -27,7 +27,10 @@ const ThreadDetail = () => {
       <Typography variant="h5">{threadTitle}</Typography>
       <List>
         {emails.map(email => (
-          <ListItem key={email.entry}>
+            <ListItem 
+            key={email.entry}
+            sx={{ display: 'flex', justifyContent: email.sender.baiter ? 'flex-end' : 'flex-start' }}
+          >
             <Email email={email} />
           </ListItem>
         ))}
