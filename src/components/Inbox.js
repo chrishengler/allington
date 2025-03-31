@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
 import { getInbox, getThreads } from "../api/api";
-import { List, Paper } from "@mui/material";
+import { Box, List, Paper, Typography } from "@mui/material";
 import InboxThread from "./InboxThread";
+import { indigo } from "@mui/material/colors";
 
 function Inbox() {
   const { id } = useParams();
@@ -24,12 +25,21 @@ function Inbox() {
 
   return (
     <div className="threads">
-      <Paper>
-        <List dense={true}>
-          {threads.map((thread) => (
+      <Paper sx={{p: 1, backgroundColor: indigo[50]}}>
+        <Box sx={{ display: "flex", px: 2, justifyContent: "space-between", width: "100%", alignItems: "center" }}>
+          <Typography variant="subtitle1">Threads</Typography>
+
+          <Typography variant="subtitle1" sx={{ textAlign: "right", flexShrink: 0, marginLeft: "auto" }}>
+            Correspondents
+          </Typography>
+        </Box>
+        <Paper elevation={2}>
+          <List dense={true}>
+            {threads.map((thread) => (
               <InboxThread key={thread.pk} thread={thread} />
-          ))}
-        </List>
+            ))}
+          </List>
+        </Paper>
       </Paper>
     </div>
   );
