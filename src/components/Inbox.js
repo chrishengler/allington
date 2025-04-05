@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { getInbox, getThreads } from "../api/api";
 import { Box, List, Paper, Typography } from "@mui/material";
 import InboxThread from "./InboxThread";
-import { indigo } from "@mui/material/colors";
+import { grey, indigo } from "@mui/material/colors";
 
 function Inbox() {
   const { id } = useParams();
@@ -23,6 +23,9 @@ function Inbox() {
     fetchThreads();
   }, [id]);
 
+  const light = grey[200];
+  const dark = grey[300];
+
   return (
     <div className="threads">
       <Paper sx={{p: 1, backgroundColor: indigo[50]}}>
@@ -35,8 +38,8 @@ function Inbox() {
         </Box>
         <Paper elevation={2}>
           <List dense={true}>
-            {threads.map((thread) => (
-              <InboxThread key={thread.pk} thread={thread} />
+            {threads.map((thread, index) => (
+              <InboxThread key={thread.pk} thread={thread} bg={(index % 2 ? dark : light )}/>
             ))}
           </List>
         </Paper>
