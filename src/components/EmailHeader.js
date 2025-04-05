@@ -1,31 +1,17 @@
-import { Box, Divider, Typography, Avatar } from "@mui/material";
+import { Box, Divider, Typography } from "@mui/material";
 import CCRecipients from "./CCRecipients";
+import HeaderSender from "./HeaderSender";
+import HeaderRecipient from "./HeaderRecipient";
+import formatTimestamp from "../utility/formatTimestamp";
 
 function EmailHeader({ sender, recipient, cc_recipients, timestamp }) {
   return (
     <Box sx={{ p: 1 }}>
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          {sender?.display_image?.image && (
-            <Avatar variant="rounded" sx={{ height: 56, width: 56, mr: 2 }} src={sender.display_image.image} />
-          )}
-          <Typography variant="body2">
-            From: {sender.name} <br />
-            <span className="monospace">&lt; redacted &gt;</span> <br />
-            {timestamp}
-          </Typography>
+      <Typography variant="body2" whiteSpace='pre-line'>{formatTimestamp(timestamp)}</Typography>
+        <Box display='flex' justifyContent='space-between' flexWrap='wrap' sx={{py: 1}}>
+        <HeaderSender sender={sender} />
+        <HeaderRecipient recipient={recipient} />
         </Box>
-
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Typography variant="body2" sx={{ textAlign: 'right' }}>
-            To: {recipient.name} <br />< br />
-            <span className="monospace">&lt; redacted &gt;</span>
-          </Typography>
-          {recipient?.display_image?.image && (
-            <Avatar variant="rounded" sx={{ height: 56, width: 56, ml: 2 }} src={recipient.display_image.image} />
-          )}
-        </Box>
-      </Box>
 
       {cc_recipients?.length > 0 && (
         <>

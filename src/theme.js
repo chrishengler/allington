@@ -39,4 +39,11 @@ export const themeOptions = {
       fontWeight: 800,
     },
   },
+  emailHeader: {
+    avatarSizeDesktop : 56,
+    avatarSizeMobile : 28,
+    avatarMarginDesktop: 2,
+    avatarMarginMobile: 1,
+    ccAvatarSize: 28
+  }
 };
